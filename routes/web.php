@@ -23,4 +23,5 @@ Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
-require __DIR__.'/auth.php';
+Route::resource('contacts', 'App\Http\Controllers\ContactController');
+require __DIR__ . '/auth.php';
