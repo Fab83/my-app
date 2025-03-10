@@ -7,10 +7,14 @@ exports.getAllProprietaires = async (req, res) => {
     const proprietaires = await prisma.proprietaire.findMany({
       include: { logements: true },
     });
-    res.render("proprietaires/index", { proprietaires });
+
+    res.render("proprietaires/index", {
+      proprietaires,
+      user: req.user, // Passe user à la vue !
+    });
   } catch (error) {
     console.error("Erreur récupération propriétaires :", error);
-    res.status(500).json({ error: "Erreur serveur" });
+    res.status(500).send("Erreur serveur");
   }
 };
 
