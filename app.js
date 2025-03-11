@@ -1,6 +1,7 @@
 const express = require("express");
 const session = require("express-session");
 const app = express();
+const port = process.env.PORT || 80;
 
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
