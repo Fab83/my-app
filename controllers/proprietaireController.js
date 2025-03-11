@@ -7,7 +7,6 @@ exports.getAllProprietaires = async (req, res) => {
     const proprietaires = await prisma.proprietaire.findMany({
       include: { logements: true },
     });
-
     res.render("proprietaires/index", {
       proprietaires,
       user: req.user, // Passe user à la vue !
@@ -73,7 +72,6 @@ exports.renderNewProprietaireForm = async (req, res) => {
 // Mise à jour d'un propriétaire
 exports.updateProprietaire = async (req, res) => {
   const id = parseInt(req.params.id);
-
   const data = {
     nom: req.body.nom,
     prenom: req.body.prenom,
@@ -100,17 +98,6 @@ exports.updateProprietaire = async (req, res) => {
   }
 };
 
-// Suppression d'un propriétaire
-exports.deleteProprietaire = async (req, res) => {
-  const id = parseInt(req.params.id);
-  try {
-    await prisma.proprietaire.delete({ where: { id } });
-    res.json({ message: "Propriétaire supprimé" });
-  } catch (error) {
-    res.status(400).json({ error: "Erreur lors de la suppression" });
-  }
-};
-
 exports.renderEditProprietaireForm = async (req, res) => {
   const id = parseInt(req.params.id);
   try {
@@ -126,5 +113,16 @@ exports.renderEditProprietaireForm = async (req, res) => {
   } catch (error) {
     console.error("Erreur chargement formulaire édition :", error);
     res.status(500).send("Erreur serveur");
+  }
+};
+
+// Suppression d'un propriétaire
+exports.deleteProprietaire = async (req, res) => {
+  const id = parseInt(req.params.id);
+  try {
+    await prisma.proprietaire.delete({ where: { id } });
+    res.json({ message: "Propriétaire supprimé" });
+  } catch (error) {
+    res.status(400).json({ error: "Erreur lors de la suppression" });
   }
 };

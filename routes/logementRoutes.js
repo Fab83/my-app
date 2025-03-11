@@ -6,6 +6,7 @@ const logementController = require("../controllers/logementController");
 router.get("/", logementController.getAllLogements);
 router.get("/nouveau", logementController.renderNewLogementForm);
 router.get("/:id", logementController.getLogementById);
+router.get("/:id/modifier", logementController.renderEditLogementForm);
 router.post("/", logementController.createLogement);
 router.put("/:id", logementController.updateLogement);
 router.delete("/:id", logementController.deleteLogement);

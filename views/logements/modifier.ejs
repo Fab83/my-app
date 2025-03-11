@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Modifier le logement</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+
+<body class="bg-light">
+    <%- include('../partials/header') %>
+
+        <div class="container mt-4">
+            <h2>
+                Modifier le logement : <%= logement.id %> - Propriétaire : <%= logement.proprietaire.nom %> <%= logement.proprietaire.prenom %>
+            </h2>
+
+            <form action="/logements/<%= logement.id %>?_method=PUT" method="POST" class="mt-4">
+
+                <div class="row mb-3">
+                    <div class="col-md-8">
+                        <label for="adresse" class="form-label">Adresse</label>
+                        <input type="text" class="form-control" id="adresse" name="adresse"
+                            value="<%= logement.adresse %>" />
+                    </div>
+                    <div class="col-md-4">
+                        <label for="ville" class="form-label">Ville</label>
+                        <select class="form-control" id="ville" name="ville">
+                            <option value="Les Adrets" <%=logement.ville==='Les Adrets' ? 'selected' : '' %>>Les Adrets
+                            </option>
+                            <option value="Fréjus" <%=logement.ville==='Fréjus' ? 'selected' : '' %>>Fréjus</option>
+                            <option value="Puget-sur-Argens" <%=logement.ville==='Puget-sur-Argens' ? 'selected' : '' %>
+                                >Puget-sur-Argens</option>
+                            <option value="Roquebrune-sur-Argens" <%=logement.ville==='Roquebrune-sur-Argens'
+                                ? 'selected' : '' %>>Roquebrune-sur-Argens</option>
+                            <option value="Saint-Raphaël" <%=logement.ville==='Saint-Raphaël' ? 'selected' : '' %>
+                                >Saint-Raphaël</option>
+                            <option value="Autre" <%=logement.ville==='Autre' ? 'selected' : '' %>>Autre</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <label for="anneeConstruction" class="form-label">Année de construction</label>
+                        <input type="number" class="form-control" id="anneeConstruction" name="anneeConstruction"
+                            value="<%= logement.anneeConstruction %>" />
+                    </div>
+                    <div class="col-md-3">
+                        <label for="surface" class="form-label">Surface avant travaux (m²)</label>
+                        <input type="number" step="0.01" class="form-control" id="surface" name="surfaceAvant"
+                            value="<%= logement.surfaceAvant %>" />
+                    </div>
+                    <!-- SURFACE APRES -->
+                    <div class="col-md-2">
+                        <label for="surface" class="form-label">Surface après travaux (m²)</label>
+                        <input type="number" step="0.01" class="form-control" id="surface" name="surfaceApres"
+                            value="<%= logement.surfaceAprès %>" />
+                    </div>
+                </div>
+                <!-- TYPE LOGEMENT -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="type" class="form-label">Type de logement</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="typeLogement" id="typeMaison"
+                                value="Logement individuel" <%=logement.typeLogement==='Logement individuel' ? 'checked'
+                                : '' %>
+                            <label class="form-check-label" for="typeMaison">Logement individuel</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="typeLogement" id="typeAppartement"
+                                value="Logement en copro" <%=logement.typeLogement==='Logement en copro' ? 'checked'
+                                : '' %>
+                            <label class="form-check-label" for="typeAppartement">
+                                Logement en copro
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="typeLogement" id="mono"
+                                value="Monopropriété" <%=logement.typeLogement==='Monopropriété' ? 'checked' : '' %>
+                            <label class="form-check-label" for="mono">
+                                Monopropriété
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="typeLogement" id="copro"
+                                value="Copropriété" <%=logement.typeLogement==='Copropriété' ? 'checked' : '' %>
+                            <label class="form-check-label" for="copro">
+                                Copropriété
+                            </label>
+                        </div>
+                    </div>
+                    <!-- TYPE BATIMENT -->
+                    <div class="col-md-6">
+                        <label for="type" class="form-label">Type de bâtiment</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="typeBatiment" id="Maison ind."
+                                value="Maison ind." <%=logement.typeBatiment==='Maison ind.' ? 'checked' : '' %>
+                            <label class="form-check-label" for="Maison ind.">Maison ind.</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="typeBatiment" id="Maison mitoyenne"
+                                value="Maison mitoyenne" <%=logement.typeBatiment==='Maison mitoyenne' ? 'checked' : ''
+                                %>
+                            <label class="form-check-label" for="Maison mitoyenne">
+                                Maison mitoyenne
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="typeBatiment" id="Appartement"
+                                value="Appartement" <%=logement.typeBatiment==='Appartement' ? 'checked' : '' %>
+                            <label class="form-check-label" for="Appartement">
+                                Appartement
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="typeBatiment" id="Immeuble"
+                                value="Immeuble" <%=logement.typeBatiment==='Immeuble' ? 'checked' : '' %>
+                            <label class="form-check-label" for="Immeuble">
+                                Immeuble
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="typeBatiment" id="Changement usage"
+                                value="Changement usage" <%=logement.typeBatiment==='Changement usage' ? 'checked' : ''
+                                %>
+                            <label class="form-check-label" for="Changement usage">Changement usage</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <label for="modeChauffage" class="form-label">Mode de chauffage</label>
+                        <select class="form-select" id="modeChauffage" name="modeChauffage">
+                            <option value="Electrique" <%= logement.modeChauffage === 'Electrique' ? 'selected' : '' %>>Electrique</option>
+                            <option value="Chaudière Gaz" <%= logement.modeChauffage === 'Chaudière Gaz' ? 'selected' : '' %>>Chaudière Gaz
+                            </option>
+                            <option value="Chaudière Fioul" <%= logement.modeChauffage === 'Chaudière Fioul' ? 'selected' : '' %>>Chaudière Fioul</option>
+                            <option value="Poêle à Bois" <%= logement.modeChauffage === 'Poêle à Bois' ? 'selected' : '' %>>Poêle à Bois</option>
+                            <option value="PAC Air/Air" <%= logement.modeChauffage === 'PAC Air/Air' ? 'selected' : '' %>>PAC Air/Air</option>
+                            <option value="PAC Air/Eau" <%= logement.modeChauffage === 'PAC Air/Eau' ? 'selected' : '' %>>PAC Air/Eau</option>
+                            <option value="Solaire combiné" <%= logement.modeChauffage === 'Solaire combiné' ? 'selected' : '' %>>Solaire combiné</option>
+                            <option value="Autre" <%= logement.modeChauffage === 'Autre' ? 'selected' : '' %>>Autre</option>
+                            <option value="Inconnu" <%= logement.modeChauffage === 'Inconnu' ? 'selected' : '' %>>Inconnu</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="chauffageSecondaire" class="form-label">Chauffage secondaire</label>
+                        <select class="form-select" id="chauffageSecondaire" name="chauffageSecondaire">
+                            <option value="Electrique" <%= logement.chauffageSecondaire === 'Electrique' ? 'selected' : '' %>>Electrique</option>
+                            <option value="Chaudière Gaz" <%= logement.chauffageSecondaire === 'Chaudière Gaz' ? 'selected' : '' %>>Chaudière Gaz</option>
+                            <option value="Chaudière Fioul" <%= logement.chauffageSecondaire === 'Chaudière Fioul' ? 'selected' : '' %>>ChaudièreFioul</option>
+                            <option value="Poêle à Bois" <%= logement.chauffageSecondaire === 'Poêle à Bois' ? 'selected' : '' %>>Poêle à Bois</option>
+                            <option value="PAC Air/Air" <%= logement.chauffageSecondaire === 'PAC Air/Air' ? 'selected' : '' %>>PAC Air/Air</option>
+                            <option value="PAC Air/Eau" <%= logement.chauffageSecondaire === 'PAC Air/Eau' ? 'selected' : '' %>>PAC Air/Eau</option>
+                            <option value="Solaire combiné" <%= logement.chauffageSecondaire==='Solaire combiné' ? 'selected' : '' %>>Solaire combiné</option>
+                            <option value="Autre" <%= logement.chauffageSecondaire === 'Autre' ? 'selected' : '' %>>Autre</option>
+                            <option value="Inconnu" <%= logement.chauffageSecondaire === 'Inconnu' ? 'selected' : '' %>>Inconnu</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="chauffageEmission" class="form-label">Emetteurs chauffage</label>
+                        <select class="form-select" id="chauffageEmission" name="chauffageEmission">
+                          <option value="Radiateurs" <%= logement.chauffageEmission === 'Radiateurs' ? 'selected' : ''%>>Radiateurs</option>
+                          <option value="Plancher chauffant" <%= logement.chauffageEmission === 'Plancher chauffant' ? 'selected' : ''%>>Plancher chauffant</option>
+                          <option value="Ventilo-convecteurs" <%= logement.chauffageEmission === 'Ventilo-convecteurs' ? 'selected' : ''%>>Ventilo-convecteurs</option>
+                          <option value="Autres" <%= logement.chauffageEmission === 'Autres' ? 'selected' : ''%>>Autres</option>
+                          <option value="Inconnu"  <%= logement.chauffageEmission === 'Inconnu' ? 'selected' : ''%>>Inconnu</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="eauChaude" class="form-label">Eau chaude</label>
+                        <select name="eauChaude" id="eauChaude" class="form-select">
+                          <option value="Chauffe-eau électrique">Chauffe-eau électrique</option>
+                          <option value="Chauffe-eau thermodynamique" <%= logement.eauChaude === 'Chauffe-eau thermodynamique' ? 'selected' : '' %>>Chauffe-eau thermodynamique</option>
+                          <option value="Chauffe-eau solaire" <%= logement.eauChaude === 'Chauffe-eau solaire' ? 'selected' : '' %>>Chauffe-eau solaire</option>
+                          <option value="Chauffe-eau gaz" <%= logement.eauChaude === 'Chauffe-eau gaz' ? 'selected' : '' %>>Chauffe-eau gaz</option>
+                          <option value="Chaudière mixte" <%= logement.eauChaude === 'Chaudière mixte' ? 'selected' : '' %>>Chaudière mixte</option>
+                          <option value="Autre" <%= logement.eauChaude === 'Autre' ? 'selected' : '' %>>Autre</option>
+                          <option value="Inconnu" <%= logement.eauChaude === 'Inconnu' ? 'selected' : '' %>>Inconnu</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                      <label for="isolationSol" class="form-label">Niveau d'isolation du sol</label>
+                      <select name="niveauIsolationSol" id="isolationSol" class="form-select">
+                        <option value="Faible" <%= logement.niveauIsolationSol === 'Faible' ? 'selected' : '' %>>Faible</option>
+                        <option value="Moyen" <%= logement.niveauIsolationSol === 'Moyen' ? 'selected' : '' %>>Moyen</option>
+                        <option value="Elevé" <%= logement.niveauIsolationSol === 'Elevé' ? 'selected' : '' %>>Elevé</option>
+                        <option value="Inconnu" <%= logement.niveauIsolationSol === 'Inconnu' ? 'selected' : '' %>>Inconnu</option>
+                      </select>
+                    </div>
+                    <div class="col-md-3">
+                      <label for="isolationMurs" class="form-label">Niveau d'isolation des murs</label>
+                      <select name="niveauIsolationMurs" id="isolationMurs" class="form-select">
+                        <option value="Faible" <%= logement.niveauIsolationMurs === 'Faible' ? 'selected' : '' %>>Faible</option>
+                        <option value="Moyen" <%= logement.niveauIsolationMurs === 'Moyen' ? 'selected' : '' %>>Moyen</option>
+                        <option value="Elevé" <%= logement.niveauIsolationMurs === 'Elevé' ? 'selected' : '' %>>Elevé</option>
+                        <option value="Inconnu" <%= logement.niveauIsolationMurs === 'Inconnu' ? 'selected' : '' %>>Inconnu</option>
+                      </select>
+                    </div>
+                    <div class="col-md-3">
+                      <label for="isolationToit" class="form-label">Niveau d'isolation des combles/toiture</label>
+                      <select name="niveauIsolationToit" id="isolationToit" class="form-select">
+                        <option value="Faible" <?= logement.niveauIsolationToit === 'Faible' ? 'selected' : '' %>>Faible</option>
+                        <option value="Moyen" <?= logement.niveauIsolationToit === 'Moyen' ? 'selected' : '' %>>Moyen</option>
+                        <option value="Elevé" <?= logement.niveauIsolationToit === 'Elevé' ? 'selected' : '' %>>Elevé</option>
+                        <option value="Inconnu" <?= logement.niveauIsolationToit === 'Inconnu' ? 'selected' : '' %>>Inconnu</option>
+                      </select>
+                    </div>
+                    <div class="col-md-3">
+                      <label for="vitrage" class="form-label">Vitrage</label>
+                      <select name="vitrage" id="vitrage" class="form-select">
+                        <option value="Simple" <%= logement.vitrage === 'Simple' ? 'selected' : '' %>>Simple</option>
+                        <option value="Double" <%= logement.vitrage === 'Double' ? 'selected' : '' %>>Double</option>
+                        <option value="Inconnu" <%= logement.vitrage === 'Inconnu' ? 'selected' : '' %>>Inconnu</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <div class="col-md-6">
+                      <label for="VMC" class="form-label">VMC</label>
+                      <select name="VMC" id="VMC" class="form-select">
+                        <option value="Naturelle/Sans" <%= logement.VMC === 'Naturelle/Sans' ? 'selected' : '' %>>Naturelle/Sans</option>
+                        <option value="Simple flux" <%= logement.VMC === 'Simple flux' ? 'selected' : '' %>>Simple flux</option>
+                        <option value="Double flux" <%= logement.VMC === 'Double flux' ? 'selected' : '' %>>Double flux</option>
+                        <option value="Inconnu" <%= logement.VMC === 'Inconnu' ? 'selected' : '' %>>Inconnu</option>
+                      </select>
+                    </div>
+          
+                    <div class="col-md-3">
+                      <label for="ProductionENR" class="form-label">Production ENR</label>
+                      <select name="ProductionEnr" id="ProductionEnr" class="form-select">
+                        <option value="Oui" <%= logement.ProductionEnr === 'Oui' ? 'selected' : '' %>>Oui</option>
+                        <option value="Non" <%= logement.ProductionEnr === 'Non' ? 'selected' : '' %>>Non</option>
+                        <option value="Inconnu" <%= logement.ProductionEnr === 'Inconnu' ? 'selected' : '' %>>Inconnu</option>
+                      </select>
+                    </div>
+          
+                    <div class="col-md-3">
+                      <label for="classeDPE" class="form-label">Classe DPE</label>
+                      <select class="form-select" id="classeDPE" name="classeDPE">
+                        <option value="A" <%= logement.classeDPE === 'A' ? 'selected' : '' %>>A</option>
+                        <option value="B" <%= logement.classeDPE === 'B' ? 'selected' : '' %>>B</option>
+                        <option value="C" <%= logement.classeDPE === 'C' ? 'selected' : '' %>>C</option>
+                        <option value="D" <%= logement.classeDPE === 'D' ? 'selected' : '' %>>D</option>
+                        <option value="E" <%= logement.classeDPE === 'E' ? 'selected' : '' %>>E</option>
+                        <option value="F" <%= logement.classeDPE === 'F' ? 'selected' : '' %>>F</option>
+                        <option value="G" <%= logement.classeDPE === 'G' ? 'selected' : '' %>>G</option>
+                        <option value="Inconnu" <%= logement.classeDPE === 'Inconnu' ? 'selected' : '' %>>Inconnu</option>
+                      </select>
+                    </div>
+                  </div>
+          
+                  <div class="mb-3">
+                    <label for="projet" class="form-label">Projet</label>
+                    <textarea name="projet" id="projet" class="form-control"
+                      placeholder="Résumé du projet ou email de demande"></textarea>
+                  </div>
+
+                <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+            </form>
+
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

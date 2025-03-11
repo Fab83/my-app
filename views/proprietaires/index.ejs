@@ -19,46 +19,46 @@
       <table class="table table-striped table-hover">
         <thead class="table-dark">
           <tr>
-            <th>ID</th>
+            <!-- <th>ID</th> -->
             <th>Nom</th>
-            <th>Prénom</th>
+            <!-- <th>Prénom</th> -->
             <th>Email</th>
             <th>Ville</th>
             <th>Statut</th>
-            <th>Revenu Fiscal</th>
-            <th>Nombre de personnes</th>
-            <th>Logements</th>
+            <!-- <th>Revenu Fiscal</th> -->
+            <!-- <th>Nombre de personnes</th> -->
+            <!-- <th>Logements</th> -->
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           <% proprietaires.forEach(proprio=> { %>
             <tr>
-              <td>
+              <!-- <td>
                 <%= proprio.id %>
-              </td>
+              </td> -->
               <td>
                 <%= proprio.nom %>
               </td>
-              <td>
+              <!-- <td>
                 <%= proprio.prenom %>
-              </td>
+              </td> -->
               <td>
                 <%= proprio.email %>
               </td>
               <td>
-                <%= proprio.ville_prop %>
+                <%= proprio.villeProp %>
               </td>
               <td>
                 <%= proprio.statut %>
               </td>
-              <td>
+              <!-- <td>
                 <%= proprio.revenuFiscal %> €
               </td>
               <td>
                 <%= proprio.nombrePersonnes %>
-              </td>
-              <td>
+              </td> -->
+              <!-- <td>
                 <% if (proprio.logements.length> 0) { %>
                   <ul>
                     <% proprio.logements.forEach(logement=> { %>
@@ -68,7 +68,7 @@
                       <% }) %>
                   </ul>
                   <% } else { %> Aucun <% } %>
-              </td>
+              </td> -->
               <td>
                 <a href="/proprietaires/<%= proprio.id %>/modifier" class="btn btn-sm btn-warning">Modifier</a>
                 <form action="/proprietaires/<%= proprio.id %>?_method=DELETE" method="POST" class="d-inline">

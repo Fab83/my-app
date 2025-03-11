@@ -2,14 +2,14 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 // Liste tous les logements
-exports.getAllLogements = async (req, res) => {
+exports.getAllLogements = async (req, res, next) => {
   try {
     const logements = await prisma.logement.findMany({
       include: { proprietaire: true },
     });
-    res.json(logements);
+    res.render("logements/index", { logements });
   } catch (error) {
-    res.status(500).json({ error: "Erreur serveur" });
+    next(error);
   }
 };
 
@@ -48,19 +48,59 @@ exports.renderNewLogementForm = async (req, res) => {
 };
 
 // Mise à jour d'un logement
-exports.updateLogement = async (req, res) => {
+exports.updateLogement = async (req, res, next) => {
   const id = parseInt(req.params.id);
-  const data = req.body;
+  const data = {
+    adresse: req.body.adresse,
+    ville: req.body.ville,
+    typeLogement: req.body.typeLogement,
+    typeBatiment: req.body.typeBatiment,
+    anneeConstruction: req.body.anneeConstruction,
+    surfaceAvant: req.body.surfaceAvant,
+    surfaceApres: req.body.surfaceApres,
+    modeChauffage: req.body.modeChauffage,
+    chauffageSecondaire: req.body.chauffageSecondaire,
+    chauffageEmission: req.body.chauffageEmission,
+    VMC: req.body.VMC,
+    ProductionEnr: req.body.ProductionEnr,
+    niveauIsolationSol: req.body.niveauIsolationSol,
+    niveauIsolationMurs: req.body.niveauIsolationMurs,
+    niveauIsolationToit: req.body.niveauIsolationToit,
+    vitrage: req.body.vitrage,
+    eauChaude: req.body.eauChaude,
+    classeDPE: req.body.classeDPE,
+    projet: req.body.projet,
+    // proprietaireId: parseInt(data.proprietaireId), // assure-toi que c'est un int
+  };
+  // data.proprietaireId = parseInt(data.proprietaireId); // assure-toi que c'est un int
+  
   try {
-    const logement = await prisma.logement.update({
+    await prisma.logement.update({
       where: { id },
       data,
     });
-    res.json(logement);
+    res.redirect("/logements");
   } catch (error) {
-    res.status(400).json({ error: "Erreur lors de la mise à jour" });
+    console.error("Erreur lors de la mise à jour :", error);
+    res.status(400).send("Erreur lors de la mise à jour");
   }
 };
+
+// Affiche le formulaire de modification d'un logement
+exports.renderEditLogementForm = async (req, res, next) => {
+  const id = parseInt(req.params.id);
+  try {
+    const logement = await prisma.logement.findUnique({
+      where: { id },
+      include: { proprietaire: true },
+    });
+    const proprietaires = await prisma.proprietaire.findMany();
+    res.render("logements/modifier", { logement, proprietaires });
+  } catch (error) {
+    next(error);
+  }
+};
+
 
 // Suppression d'un logement
 exports.deleteLogement = async (req, res) => {
