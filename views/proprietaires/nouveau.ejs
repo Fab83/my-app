@@ -61,7 +61,17 @@
             />
           </div>
         </div>
-
+        <div class="row mb-3">
+          <div class="col">
+            <label for="adresse" class="form-label">Adresse propriétaire</label>
+            <input
+              type="text"
+              class="form-control"
+              name="adresseProp"
+              id="adresse"
+            />
+          </div>
+        </div>
         <div class="row mb-3">
           <div class="col">
             <label for="villeProp" class="form-label">Ville</label>
@@ -72,6 +82,7 @@
               <option value="Roquebrune-sur-Argens">
                 Roquebrune-sur-Argens
               </option>
+              <option value="Saint-Raphaël">Saint-Raphaël</option>
               <option value="Autre">Autre</option>
             </select>
           </div>
@@ -118,6 +129,34 @@
               id="nombrePersonnes"
               name="nombrePersonnes"
             />
+          </div>
+          <div class="col">
+            <label class="form-label">Type de propriétaire</label>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="typeProprietaire"
+                id="physique"
+                value="Personne physique"
+                checked
+              />
+              <label class="form-check-label" for="physique"
+                >Personne physique</label
+              >
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="typeProprietaire"
+                id="morale"
+                value="Personne morale"
+              />
+              <label class="form-check-label" for="morale"
+                >Personne morale</label
+              >
+            </div>
           </div>
         </div>
 

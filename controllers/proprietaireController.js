@@ -39,8 +39,10 @@ exports.createProprietaire = async (req, res) => {
   const data = {
     nom: req.body.nom,
     prenom: req.body.prenom,
+    physMorale: req.body.physMorale,
     email: req.body.email,
     telephone: req.body.telephone || null,
+    adresseProp: req.body.adresseProp,
     villeProp: req.body.villeProp,
     statut: req.body.statut,
     revenuFiscal: parseInt(req.body.revenuFiscal), // ➡️ conversion en Int
@@ -75,12 +77,14 @@ exports.updateProprietaire = async (req, res) => {
   const data = {
     nom: req.body.nom,
     prenom: req.body.prenom,
+    physMorale: req.body.physMorale,
     email: req.body.email,
     telephone: req.body.telephone || null,
+    adresseProp: req.body.adresseProp,
     villeProp: req.body.villeProp,
     statut: req.body.statut,
-    revenuFiscal: parseInt(req.body.revenuFiscal),
-    nombrePersonnes: parseInt(req.body.nombrePersonnes),
+    revenuFiscal: parseInt(req.body.revenuFiscal), // ➡️ conversion en Int
+    nombrePersonnes: parseInt(req.body.nombrePersonnes), // ➡️ conversion en Int
   };
 
   try {

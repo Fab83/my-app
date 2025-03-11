@@ -19,8 +19,10 @@ model Proprietaire {
   nom       String
   prenom    String
   createdAt DateTime @default(now())
+  physMorale  String
   email     String     @unique
   telephone String?
+  adresseProp String
   villeProp     String
   statut    String
   revenuFiscal  Int
@@ -31,12 +33,22 @@ model Proprietaire {
 model Logement {
   id               Int          @id @default(autoincrement())
   adresse          String
-  codePostal       String
   ville            String?
+  typeLogement  String
+  typeBatiment  String
   anneeConstruction Int?
-  surface          Float?
+  surfaceAvant          Float?
+  surfaceApres          Float?
   type              String
   modeChauffage   String?
+  chauffageSecondaire String
+  chauffageEmission String
+  VMC   String
+  ProductionEnr String
+  niveauIsolationSol  String
+  niveauIsolationMurs  String
+  niveauIsolationToit  String
+  vitrage   String
   eauChaude       String?
   classeDPE       String
   projet        String
