@@ -22,8 +22,8 @@ model Proprietaire {
   physMorale  String
   email     String     @unique
   telephone String?
-  adresseProp String
-  villeProp     String
+  adresseProp String?
+  villeProp     String?
   statut    String
   revenuFiscal  Int
   nombrePersonnes Int
@@ -36,10 +36,9 @@ model Logement {
   ville            String?
   typeLogement  String
   typeBatiment  String
-  anneeConstruction Int?
-  surfaceAvant          Float?
-  surfaceApres          Float?
-  type              String
+  anneeConstruction String?
+  surfaceAvant          String?
+  surfaceApres          String?
   modeChauffage   String?
   chauffageSecondaire String
   chauffageEmission String

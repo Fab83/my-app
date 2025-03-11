@@ -31,16 +31,20 @@ exports.getLogementById = async (req, res) => {
 };
 
 // Création d'un logement
-exports.createLogement = async (req, res) => {
+exports.createLogement = async (req, res, next) => {
   const data = req.body;
   data.proprietaireId = parseInt(data.proprietaireId); // assure-toi que c'est un int
   try {
     await prisma.logement.create({ data });
     res.redirect("/logements");
   } catch (error) {
-    console.error(error);
-    res.status(400).send("Erreur lors de la création");
+    next(error); // Transmettre l'erreur au middleware de gestion des erreurs
   }
+};
+
+exports.renderNewLogementForm = async (req, res) => {
+  const proprietaires = await prisma.proprietaire.findMany();
+  res.render("logements/nouveau", { proprietaires });
 };
 
 // Mise à jour d'un logement
@@ -67,9 +71,4 @@ exports.deleteLogement = async (req, res) => {
   } catch (error) {
     res.status(400).json({ error: "Erreur lors de la suppression" });
   }
-};
-
-exports.renderNewLogementForm = async (req, res) => {
-  const proprietaires = await prisma.proprietaire.findMany();
-  res.render("logements/nouveau", { proprietaires });
 };

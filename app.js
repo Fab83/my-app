@@ -123,11 +123,16 @@ app.get("/", ensureAuthenticated, (req, res) => {
 app.use("/proprietaires", ensureAuthenticated, proprietaireRoutes);
 app.use("/logements", ensureAuthenticated, logementRoutes);
 
+// Middleware de gestion des erreurs
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send("Something broke!");
+});
+
 // ------------------------------
 // Démarrage serveur
 // ------------------------------
+
 app.listen(3000, () => {
   console.log("Serveur lancé sur http://localhost:3000");
 });
-
-// const { ensureAuthenticated } = require("./routes/authRoutes")(app); // Importer ensureAuthenticated

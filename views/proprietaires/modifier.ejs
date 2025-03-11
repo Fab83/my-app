@@ -22,76 +22,97 @@
         method="POST"
         class="mt-4"
       >
-        <div class="mb-3">
-          <label for="nom" class="form-label">Nom</label>
-          <input
-            type="text"
-            class="form-control"
-            id="nom"
-            name="nom"
-            value="<%= proprietaire.nom %>"
-            required
-          />
+        <div class="row mb-3">
+          <div class="col">
+            <label for="nom" class="form-label">Nom</label>
+            <input
+              type="text"
+              class="form-control"
+              id="nom"
+              name="nom"
+              value="<%= proprietaire.nom %>"
+              required
+            />
+          </div>
+
+          <div class="col">
+            <label for="prenom" class="form-label">Prénom</label>
+            <input
+              type="text"
+              class="form-control"
+              id="prenom"
+              name="prenom"
+              value="<%= proprietaire.prenom %>"
+              required
+            />
+          </div>
         </div>
 
-        <div class="mb-3">
-          <label for="prenom" class="form-label">Prénom</label>
-          <input
-            type="text"
-            class="form-control"
-            id="prenom"
-            name="prenom"
-            value="<%= proprietaire.prenom %>"
-            required
-          />
+        <div class="row mb-3">
+          <div class="col">
+            <label for="email" class="form-label">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              name="email"
+              value="<%= proprietaire.email %>"
+              required
+            />
+          </div>
+
+          <div class="col">
+            <label for="telephone" class="form-label">Téléphone</label>
+            <input
+              type="text"
+              class="form-control"
+              id="telephone"
+              name="telephone"
+              value="<%= proprietaire.telephone %>"
+            />
+          </div>
         </div>
 
-        <div class="mb-3">
-          <label for="email" class="form-label">Email</label>
-          <input
-            type="email"
-            class="form-control"
-            id="email"
-            name="email"
-            value="<%= proprietaire.email %>"
-            required
-          />
+        <div class="row mb-3">
+          <div class="col-8">
+            <label for="adresseProp" class="form-label">Adresse</label>
+            <input
+              type="text"
+              class="form-control"
+              id="adresseProp"
+              name="adresseProp"
+              value="<%= proprietaire.adresseProp %>"
+              required
+            />
+          </div>
+
+          <div class="col-4">
+            <label for="villeProp" class="form-label">Ville</label>
+            <select class="form-control" id="villeProp" name="villeProp">
+              <option value="Les Adrets" <%= proprietaire.villeProp === 'Les Adrets' ? 'selected' : '' %>>Les Adrets</option>
+              <option value="Fréjus" <%= proprietaire.villeProp === 'Fréjus' ? 'selected' : '' %>>Fréjus</option>
+              <option value="Puget-sur-Argens" <%= proprietaire.villeProp === 'Puget-sur-Argens' ? 'selected' : '' %>>Puget-sur-Argens</option>
+              <option value="Roquebrune-sur-Argens" <%= proprietaire.villeProp === 'Roquebrune-sur-Argens' ? 'selected' : '' %>>Roquebrune-sur-Argens</option>
+              <option value="Saint-Raphaël" <%= proprietaire.villeProp === 'Saint-Raphaël' ? 'selected' : '' %>>Saint-Raphaël</option>
+              <option value="Autre" <%= proprietaire.villeProp === 'Autre' ? 'selected' : '' %>>Autre</option>
+            </select>
+          </div>
         </div>
 
-        <div class="mb-3">
-          <label for="telephone" class="form-label">Téléphone</label>
-          <input
-            type="text"
-            class="form-control"
-            id="telephone"
-            name="telephone"
-            value="<%= proprietaire.telephone %>"
-          />
-        </div>
-
-        <div class="mb-3">
-          <label for="ville_prop" class="form-label">Ville</label>
-          <input
-            type="text"
-            class="form-control"
-            id="ville_prop"
-            name="ville_prop"
-            value="<%= proprietaire.ville_prop %>"
-          />
-        </div>
-
-        <div class="mb-3">
+        <div class="row mb-3">
+          <div class="col-6">
           <label for="statut" class="form-label">Statut</label>
-          <input
-            type="text"
-            class="form-control"
-            id="statut"
-            name="statut"
-            value="<%= proprietaire.statut %>"
-          />
+          <select class="form-control" id="statut" name="statut">
+            <option value="Propriétaire occupant" <%= proprietaire.statut === 'Propriétaire occupant' ? 'selected' : '' %>>Propriétaire occupant</option>
+            <option value="Propriétaire bailleur" <%= proprietaire.statut === 'Propriétaire bailleur' ? 'selected' : '' %>>Propriétaire bailleur</option>
+            <option value="Locataire" <%= proprietaire.statut === 'Locataire' ? 'selected' : '' %>>Locataire</option>
+            <option value="Nu-propriétaire" <%= proprietaire.statut === 'Nu-propriétaire' ? 'selected' : '' %>>Nu-propriétaire</option>
+            <option value="Occupant à titre gratuit" <%= proprietaire.statut === 'Occupant à titre gratuit' ? 'selected' : '' %>>Occupant à titre gratuit</option>
+            <option value="SCI" <%= proprietaire.statut === 'SCI' ? 'selected' : '' %>>SCI</option>
+          </select>
         </div>
 
-        <div class="mb-3">
+        <div class="col-3">
           <label for="revenuFiscal" class="form-label">Revenu Fiscal</label>
           <input
             type="number"
@@ -99,10 +120,11 @@
             id="revenuFiscal"
             name="revenuFiscal"
             value="<%= proprietaire.revenuFiscal %>"
+            required
           />
         </div>
 
-        <div class="mb-3">
+        <div class="col-3">
           <label for="nombrePersonnes" class="form-label"
             >Nombre de personnes dans le foyer</label
           >
@@ -112,7 +134,39 @@
             id="nombrePersonnes"
             name="nombrePersonnes"
             value="<%= proprietaire.nombrePersonnes %>"
+            required
           />
+        </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="physMorale" class="form-label">Physique/Morale</label>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="physMorale"
+              id="physique"
+              value="Personne physique"
+              <%= proprietaire.physMorale === 'Personne physique' ? 'checked' : '' %>
+            />
+            <label class="form-check-label" for="physique"
+              >Personne physique</label
+            >
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="physMorale"
+              id="morale"
+              value="Personne morale"
+              <%= proprietaire.physMorale === 'Personne morale' ? 'checked' : '' %>
+            />
+            <label class="form-check-label" for="morale"
+              >Personne morale</label
+            >
+          </div>
         </div>
 
         <button type="submit" class="btn btn-primary">

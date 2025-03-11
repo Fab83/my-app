@@ -1,144 +1,268 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Ajouter un logement</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-  </head>
-  <body class="bg-light">
-    <%- include('../partials/header') %>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Ajouter un logement</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+
+<body class="bg-light">
+  <%- include('../partials/header') %>
 
     <div class="container mt-4">
       <h2>Ajouter un logement</h2>
 
       <form action="/logements" method="POST" class="mt-4">
-        <div class="mb-3">
-          <label for="proprietaireId" class="form-label">Propriétaire</label>
-          <select
-            class="form-select"
-            id="proprietaireId"
-            name="proprietaireId"
-            required
-          >
-            <% proprietaires.forEach(proprio => { %>
-            <option value="<%= proprio.id %>">
-              <%= proprio.nom %> <%= proprio.prenom %>
-            </option>
-            <% }) %>
-          </select>
-        </div>
-        <div class="mb-3">
-          <label for="adresse" class="form-label">Adresse</label>
-          <input
-            type="text"
-            class="form-control"
-            id="adresse"
-            name="adresse"
-            required
-          />
+        <div class="row mb-3">
+          <div class="col-4">
+            <label for="proprietaireId" class="form-label">Propriétaire</label>
+            <select class="form-select" id="proprietaireId" name="proprietaireId" required>
+              <% proprietaires.forEach(proprio=> { %>
+                <option value="<%= proprio.id %>">
+                  <%= proprio.nom %>
+                    <%= proprio.prenom %>
+                </option>
+                <% }) %>
+            </select>
+          </div>
+          <div class="col-8">
+            <label for="adresse" class="form-label">Adresse (si différente)</label>
+            <input type="text" class="form-control" id="adresse" name="adresse" />
+          </div>
         </div>
 
         <div class="row mb-3">
-          <div class="col-4">
-            <label for="codePostal" class="form-label">Code Postal</label>
-            <input
-              type="text"
-              class="form-control"
-              id="codePostal"
-              name="codePostal"
-              required
-            />
-          </div>
-
-          <div class="col-8">
-            <label for="villeProp" class="form-label">Ville</label>
-            <select class="form-control" id="villeProp" name="villeProp">
+          <!-- VILLE -->
+          <div class="col-3">
+            <label for="ville" class="form-label">Ville</label>
+            <select class="form-control" id="ville" name="ville">
               <option value="Les Adrets">Les Adrets</option>
               <option value="Fréjus">Fréjus</option>
               <option value="Puget-sur-Argens">Puget-sur-Argens</option>
-              <option value="Roquebrune-sur-Argens">
-                Roquebrune-sur-Argens
-              </option>
+              <option value="Roquebrune-sur-Argens">Roquebrune-sur-Argens</option>
+              <option value="Saint-Raphaël">Saint-Raphaël</option>
               <option value="Autre">Autre</option>
+            </select>
+          </div>
+          <!-- ANNEE -->
+          <div class="col-3">
+            <label for="anneeConstruction" class="form-label">Année de construction</label>
+            <input type="number" class="form-control" id="anneeConstruction" name="anneeConstruction" />
+          </div>
+          <!-- SURFACE AVANT -->
+          <div class="col-3">
+            <label for="surface" class="form-label">Surface avant travaux (m²)</label>
+            <input type="number" step="0.01" class="form-control" id="surface" name="surfaceAvant" />
+          </div>
+          <!-- SURFACE APRES -->
+          <div class="col-3">
+            <label for="surface" class="form-label">Surface après travaux (m²)</label>
+            <input type="number" step="0.01" class="form-control" id="surface" name="surfaceApres" />
+          </div>
+        </div>
+
+        <!-- TYPE LOGEMENT -->
+        <div class="row mb-3">
+          <div class="col-6">
+            <label for="type" class="form-label">Type de logement</label>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="typeLogement" id="typeMaison"
+                value="Logement individuel" checked>
+              <label class="form-check-label" for="typeMaison">Logement individuel</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="typeLogement" id="typeAppartement"
+                value="Logement en copro" required>
+              <label class="form-check-label" for="typeAppartement">
+                Logement en copro
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="typeLogement" id="mono" value="Monopropriété" required>
+              <label class="form-check-label" for="mono">
+                Monopropriété
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="typeLogement" id="copro" value="Copropriété" required>
+              <label class="form-check-label" for="copro">
+                Copropriété
+              </label>
+            </div>
+          </div>
+          <!-- TYPE BATIMENT -->
+          <div class="col-6">
+            <label for="type" class="form-label">Type de bâtiment</label>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="typeBatiment" id="Maison ind." value="Maison ind."
+                checked>
+              <label class="form-check-label" for="Maison ind.">Maison ind.</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="typeBatiment" id="Maison mitoyenne"
+                value="Maison mitoyenne">
+              <label class="form-check-label" for="Maison mitoyenne">
+                Maison mitoyenne
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="typeBatiment" id="Appartement" value="Appartement">
+              <label class="form-check-label" for="Appartement">
+                Appartement
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="typeBatiment" id="Immeuble" value="Immeuble">
+              <label class="form-check-label" for="Immeuble">
+                Immeuble
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="typeBatiment" id="Changement usage"
+                value="Changement usage">
+              <label class="form-check-label" for="Changement usage">
+                Changement usage
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-3">
+            <label for="modeChauffage" class="form-label">Mode de chauffage</label>
+            <select class="form-select" id="modeChauffage" name="modeChauffage">
+              <option value="Electrique">Electrique</option>
+              <option value="Chaudière Gaz">Chaudière Gaz</option>
+              <option value="Chaudière Fioul">Chaudière Fioul</option>
+              <option value="Poêle à Bois">Poêle à Bois</option>
+              <option value="PAC Air/Air">PAC Air/Air</option>
+              <option value="PAC Air/Eau">PAC Air/Eau</option>
+              <option value="Solaire combiné">Solaire combiné</option>
+              <option value="Autre">Autre</option>
+              <option value="Inconnu" selected>Inconnu</option>
+            </select>
+          </div>
+
+          <div class="col-md-3">
+            <label for="chauffageSecondaire" class="form-label">Mode de chauffage secondaire</label>
+            <select class="form-select" id="chauffageSecondaire" name="chauffageSecondaire">
+              <option value="Electrique">Electrique</option>
+              <option value="Chaudière Gaz">Chaudière Gaz</option>
+              <option value="Chaudière Fioul">Chaudière Fioul</option>
+              <option value="Poêle à Bois">Poêle à Bois</option>
+              <option value="PAC Air/Air">PAC Air/Air</option>
+              <option value="PAC Air/Eau">PAC Air/Eau</option>
+              <option value="Solaire combiné">Solaire combiné</option>
+              <option value="Autre">Autre</option>
+              <option value="Sans" selected>Sans</option>
+              <option value="Inconnu">Inconnu</option>
+            </select>
+          </div>
+
+          <div class="col-md-3">
+            <label for="chauffageEmission" class="form-label">Emetteurs chauffage</label>
+            <select class="form-select" id="chauffageEmission" name="chauffageEmission">
+              <option value="Radiateurs">Radiateurs</option>
+              <option value="Plancher chauffant">Plancher chauffant</option>
+              <option value="Ventilo-convecteurs">Ventilo-convecteurs</option>
+              <option value="Autres">Autres</option>
+              <option value="Inconnu" selected>Inconnu</option>
+            </select>
+          </div>
+
+          <div class="col-md-3">
+            <label for="eauChaude" class="form-label">Eau chaude</label>
+            <select name="eauChaude" id="eauChaude" class="form-select">
+              <option value="Chauffe-eau électrique">Chauffe-eau électrique</option>
+              <option value="Chauffe-eau thermodynamique">Chauffe-eau thermodynamique</option>
+              <option value="Chauffe-eau solaire">Chauffe-eau solaire</option>
+              <option value="Chauffe-eau gaz">Chauffe-eau gaz</option>
+              <option value="Chaudière mixte">Chaudière mixte</option>
+              <option value="Autre">Autre</option>
+              <option value="Inconnu" selected>Inconnu</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- ISOLATION -->
+        <div class="row mb-3">
+          <div class="col-md-3">
+            <label for="isolationSol" class="form-label">Niveau d'isolation du sol</label>
+            <select name="niveauIsolationSol" id="isolationSol" class="form-select">
+              <option value="Faible">Faible</option>
+              <option value="Moyen">Moyen</option>
+              <option value="Elevé">Elevé</option>
+              <option value="Inconnu" selected>Inconnu</option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <label for="isolationMurs" class="form-label">Niveau d'isolation des murs</label>
+            <select name="niveauIsolationMurs" id="isolationMurs" class="form-select">
+              <option value="Faible">Faible</option>
+              <option value="Moyen">Moyen</option>
+              <option value="Elevé">Elevé</option>
+              <option value="Inconnu" selected>Inconnu</option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <label for="isolationToit" class="form-label">Niveau d'isolation des combles/toiture</label>
+            <select name="niveauIsolationToit" id="isolationToit" class="form-select">
+              <option value="Faible">Faible</option>
+              <option value="Moyen">Moyen</option>
+              <option value="Elevé">Elevé</option>
+              <option value="Inconnu" selected>Inconnu</option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <label for="vitrage" class="form-label">Vitrage</label>
+            <select name="vitrage" id="vitrage" class="form-select">
+              <option value="Simple">Simple</option>
+              <option value="Double">Double</option>
+              <option value="Inconnu" selected>Inconnu</option>
             </select>
           </div>
         </div>
 
         <div class="row mb-3">
-          <div class="col-4">
-            <label for="anneeConstruction" class="form-label"
-              >Année de construction</label
-            >
-            <input
-              type="number"
-              class="form-control"
-              id="anneeConstruction"
-              name="anneeConstruction"
-            />
+          <div class="col-md-6">
+            <label for="VMC" class="form-label">VMC</label>
+            <select name="VMC" id="VMC" class="form-select">
+              <option value="Naturelle/Sans">Naturelle/Sans</option>
+              <option value="Simple flux">Simple flux</option>
+              <option value="Double flux">Double flux</option>
+              <option value="Inconnu" selected>Inconnu</option>
+            </select>
           </div>
 
-          <div class="col-4">
-            <label for="surface" class="form-label">Surface (m²)</label>
-            <input
-              type="number"
-              step="0.01"
-              class="form-control"
-              id="surface"
-              name="surface"
-            />
+          <div class="col-md-3">
+            <label for="ProductionENR" class="form-label">Production ENR</label>
+            <select name="ProductionEnr" id="ProductionENR" class="form-select">
+              <option value="Oui">Oui</option>
+              <option value="Non">Non</option>
+              <option value="Inconnu" selected>Inconnu</option>
+            </select>
           </div>
 
-          <div class="col-4">
-            <label for="type" class="form-label">Type</label>
-            <input
-              type="text"
-              class="form-control"
-              id="type"
-              name="type"
-              required
-            />
+          <div class="col-md-3">
+            <label for="classeDPE" class="form-label">Classe DPE</label>
+            <select class="form-select" id="classeDPE" name="classeDPE">
+              <option value="A">A</option>
+              <option value="B">B</option>
+              <option value="C">C</option>
+              <option value="D">D</option>
+              <option value="E">E</option>
+              <option value="F">F</option>
+              <option value="G">G</option>
+              <option value="Inconnu" selected>Inconnu</option>
+            </select>
           </div>
-        </div>
-
-        <div class="mb-3">
-          <label for="modeChauffage" class="form-label"
-            >Mode de chauffage</label
-          >
-          <input
-            type="text"
-            class="form-control"
-            id="modeChauffage"
-            name="modeChauffage"
-          />
-        </div>
-
-        <div class="mb-3">
-          <label for="eauChaude" class="form-label">Eau chaude</label>
-          <input
-            type="text"
-            class="form-control"
-            id="eauChaude"
-            name="eauChaude"
-          />
-        </div>
-
-        <div class="mb-3">
-          <label for="classeDPE" class="form-label">Classe DPE</label>
-          <input
-            type="text"
-            class="form-control"
-            id="classeDPE"
-            name="classeDPE"
-            required
-          />
         </div>
 
         <div class="mb-3">
           <label for="projet" class="form-label">Projet</label>
-          <input type="text" class="form-control" id="projet" name="projet" />
+          <textarea name="projet" id="projet" class="form-control"
+            placeholder="Résumé du projet ou email de demande"></textarea>
         </div>
 
         <button type="submit" class="btn btn-primary">
@@ -148,5 +272,6 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
+</body>
+
 </html>
