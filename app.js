@@ -133,6 +133,10 @@ app.use((err, req, res, next) => {
 // Démarrage serveur
 // ------------------------------
 
-app.listen(3000, () => {
-  console.log("Serveur lancé sur http://localhost:3000");
+// app.listen(3000, () => {
+//   console.log("Serveur lancé sur http://localhost:3000");
+// });
+
+app.listen(port, "0.0.0.0", () => {
+  console.log(`Serveur lancé sur http://localhost:${port}`);
 });
